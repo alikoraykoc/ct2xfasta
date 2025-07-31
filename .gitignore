@@ -1,0 +1,23 @@
+cat > .gitignore <<'EOF'
+# virtual env / caches / build
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS cruft
+.DS_Store
+
+# build & packaging
+dist/
+build/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+
+# data (örnek veri ileride eklenecekse git dışı kalsın)
+data/
+EOF
