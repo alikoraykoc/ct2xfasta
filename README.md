@@ -1,3 +1,5 @@
+![CI](https://github.com/alikoraykoc/ct2xfasta/actions/workflows/ci.yml/badge.svg)
+
 ct2xfasta
 
 Convert RNA secondary structures from CT / DBN (Vienna) / BPSEQ into 4SALE‑compatible XFasta.
