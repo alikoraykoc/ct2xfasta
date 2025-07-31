@@ -1,10 +1,13 @@
 import os
 
-def normalize_sequence(seq: str,
-                       to_upper: bool = False,
-                       to_lower: bool = False,
-                       rna: bool = False,
-                       strip_gaps: bool = False) -> str:
+
+def normalize_sequence(
+    seq: str,
+    to_upper: bool = False,
+    to_lower: bool = False,
+    rna: bool = False,
+    strip_gaps: bool = False,
+) -> str:
     s = seq
     if strip_gaps:
         s = s.replace("-", "").replace(".", "").replace(" ", "")
@@ -17,6 +20,7 @@ def normalize_sequence(seq: str,
     elif to_lower:
         s = s.lower()
     return s
+
 
 def read_name_map(path: str) -> dict:
     mapping = {}
@@ -32,6 +36,7 @@ def read_name_map(path: str) -> dict:
                 continue
             mapping[os.path.basename(parts[0])] = parts[1]
     return mapping
+
 
 def guess_format(path: str) -> str:
     ext = os.path.splitext(path)[1].lower()

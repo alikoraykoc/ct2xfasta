@@ -1,10 +1,12 @@
-from typing import Iterable, Tuple, TextIO
+from typing import Iterable, TextIO, Tuple
+
 
 def write_xfasta(records: Iterable[Tuple[str, str, str]], fh: TextIO):
     for name, seq, dot in records:
         fh.write(f">{name}\n")
         fh.write(f"{seq}\n")
         fh.write(f"{dot}\n")
+
 
 # NEW
 def write_dotbracket(records: Iterable[Tuple[str, str, str]], fh: TextIO):

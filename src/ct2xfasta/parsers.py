@@ -1,16 +1,18 @@
-from typing import List, Tuple
 import os
 import re
+from typing import List, Tuple
+
 
 def _pairs_to_dotbracket(pairs: list) -> str:
     n = len(pairs)
     dot = ["." for _ in range(n)]
     for i, pair in enumerate(pairs, start=1):
         if pair > 0 and i < pair <= n:
-            dot[i-1] = "("
-            if dot[pair-1] == ".":
-                dot[pair-1] = ")"
+            dot[i - 1] = "("
+            if dot[pair - 1] == ".":
+                dot[pair - 1] = ")"
     return "".join(dot)
+
 
 def parse_ct(path: str) -> List[Tuple[str, str, str]]:
     structs = []
@@ -30,7 +32,7 @@ def parse_ct(path: str) -> List[Tuple[str, str, str]]:
         if len(parts) > 1:
             name = "_".join(parts[1:])
 
-        block = lines[i+1:i+1+n]
+        block = lines[i + 1 : i + 1 + n]
         if len(block) < n:
             raise ValueError(f"Incomplete CT block (expected {n} rows) in {path}")
 
@@ -51,8 +53,10 @@ def parse_ct(path: str) -> List[Tuple[str, str, str]]:
         block_idx += 1
     return structs
 
+
 # --- NEW: Vienna / DBN ---
-_dbn_struct_re = re.compile(r'^([().\[\]<>]+)')
+_dbn_struct_re = re.compile(r"^([().\[\]<>]+)")
+
 
 def parse_dbn(path: str) -> List[Tuple[str, str, str]]:
     """
@@ -75,8 +79,8 @@ def parse_dbn(path: str) -> List[Tuple[str, str, str]]:
             name = line[1:].strip() or "record"
             if i + 2 >= len(lines):
                 break
-            seq = lines[i+1].strip()
-            struct_line = lines[i+2].strip()
+            seq = lines[i + 1].strip()
+            struct_line = lines[i + 2].strip()
             m = _dbn_struct_re.match(struct_line)
             if not m:
                 raise ValueError(f"DBN structure line not recognized: {struct_line}")
@@ -88,7 +92,7 @@ def parse_dbn(path: str) -> List[Tuple[str, str, str]]:
             if i + 1 >= len(lines):
                 break
             seq = line
-            struct_line = lines[i+1].strip()
+            struct_line = lines[i + 1].strip()
             m = _dbn_struct_re.match(struct_line)
             if not m:
                 raise ValueError(f"DBN structure line not recognized: {struct_line}")

@@ -2,10 +2,14 @@ from typing import List, Tuple
 
 # Canonical + wobble
 CANONICAL_RNA = {
-    ("A", "U"), ("U", "A"),
-    ("G", "C"), ("C", "G"),
-    ("G", "U"), ("U", "G"),
+    ("A", "U"),
+    ("U", "A"),
+    ("G", "C"),
+    ("C", "G"),
+    ("G", "U"),
+    ("U", "G"),
 }
+
 
 def basic_consistency(seq: str, dot: str) -> List[str]:
     errs = []
@@ -25,6 +29,7 @@ def basic_consistency(seq: str, dot: str) -> List[str]:
         errs.append("Unbalanced parentheses in structure")
     return errs
 
+
 def noncanonical_pairs(seq: str, dot: str) -> List[Tuple[int, str, int, str]]:
     """
     Return list of non-canonical base pairs (1-based positions and bases).
@@ -38,8 +43,8 @@ def noncanonical_pairs(seq: str, dot: str) -> List[Tuple[int, str, int, str]]:
             if not stack:
                 continue
             j = stack.pop()
-            b1 = seq[j-1].upper()
-            b2 = seq[i-1].upper()
+            b1 = seq[j - 1].upper()
+            b2 = seq[i - 1].upper()
             if (b1, b2) not in CANONICAL_RNA:
                 res.append((j, b1, i, b2))
     return res
